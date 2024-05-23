@@ -1,16 +1,14 @@
 from django.shortcuts import render
-from productos.models import Producto, CategoriaProducto
+from .models import Estudiante, Tesis
 
-# Create your views here.
 def index(request):
-
-  categorias = CategoriaProducto.objects.all()
-  productos = Producto.objects.filter(publico=True)
-  cattmp = Producto.objects.filter(categoria=1)
-  
-  return render(request, 'mainapp/index.html', {
-    'titulo':'Home',
-    'categorias':categorias,
-    'productos':productos,
-    'cattmp':cattmp
-  })
+    estudiantes = Estudiante.objects.all()
+    tesis_aprobadas = Tesis.objects.filter(aprobada=True)
+    tesis_pendientes = Tesis.objects.filter(aprobada=False)
+    
+    return render(request, 'tu_app/index.html', {
+        'titulo': 'Página de inicio',
+        'estudiantes': estudiantes,
+        'tesis_aprobadas': tesis_aprobadas,
+        'tesis_pendientes': tesis_pendientes
+    })
